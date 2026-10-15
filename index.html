@@ -110,6 +110,13 @@ p.lead b,p.lead strong{font-weight:600;color:var(--ink)}
 .statl{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:8px}
 .stats{display:flex;gap:44px;flex-wrap:wrap;margin-top:50px}
 
+/* axo */
+#falla{max-width:none;padding:8vh 3vw}
+#axo{position:relative;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#000;height:88vh;min-height:520px}
+#axo iframe{width:100%;height:100%;border:0;display:block}
+.toggle{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:5;display:flex;border:1px solid var(--line);border-radius:99px;background:rgba(10,10,12,.85);backdrop-filter:blur(8px);overflow:hidden}
+.toggle button{background:none;border:0;color:var(--dim);font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;cursor:pointer;transition:.4s;white-space:nowrap}
+.toggle button.on{background:var(--c3);color:#120a06}
 /* mapa */
 #mapwrap{margin-top:40px;position:relative;border:1px solid var(--line);border-radius:18px;background:radial-gradient(900px 500px at 55% 55%,#1b1b20,#101012);overflow:hidden}
 #mapwrap svg{width:100%;height:auto;display:block}
@@ -219,72 +226,12 @@ footer{padding:40px 6vw;border-top:1px solid var(--line);font:400 11px var(--mon
 
 <!-- FALLA -->
 <section id="falla">
-  <div id="mapwrap" class="rv" data-mode="real">
+  <div id="axo" class="rv">
     <div class="toggle">
-      <button data-m="pot">Lo que dibuja el POT</button>
-      <button data-m="real" class="on">Lo que ocurre</button>
+      <button data-src="https://alejagoguti-cpu.github.io/humedalburro-secuencia/" class="on">Axonometría · Territorio 3D</button>
+      <button data-src="https://alejagoguti-cpu.github.io/humedalburro-secuencia/axonometria-corte.html">Corte axonométrico</button>
     </div>
-    <svg viewBox="0 0 1000 600" id="msvg" aria-label="Esquema de Kennedy: Corabastos, humedales y ejes viales">
-      <defs>
-        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,.035)"/></pattern>
-      </defs>
-      <rect width="1000" height="600" fill="url(#grid)"/>
-
-      <!-- vías -->
-      <path id="rCali" class="road" d="M170 -10 C190 150 140 300 200 420 S260 560 250 620"/>
-      <path class="roadc" d="M170 -10 C190 150 140 300 200 420 S260 560 250 620"/>
-      <path id="rC80" class="road" d="M560 -10 C540 120 600 240 590 330 S540 500 580 620"/>
-      <path class="roadc" d="M560 -10 C540 120 600 240 590 330 S540 500 580 620"/>
-      <path id="rAm" class="road" d="M-10 300 C200 330 400 270 590 330 S850 380 1010 340" style="stroke-width:9"/>
-      <text class="lbl d" x="188" y="560" transform="rotate(-88 188 560)">AV. CIUDAD DE CALI</text>
-      <text class="lbl d" x="615" y="120" transform="rotate(88 615 120)">CARRERA 80</text>
-      <text class="lbl d" x="40" y="285">AV. DE LAS AMÉRICAS</text>
-
-      <!-- humedales -->
-      <g>
-        <ellipse class="rip" cx="270" cy="170" rx="70" ry="38"/>
-        <ellipse class="rip" cx="270" cy="170" rx="70" ry="38" style="animation-delay:2s"/>
-        <path class="wet" d="M205 170 C210 130 290 118 335 150 C355 180 320 212 270 208 C225 210 200 195 205 170Z"/>
-        <text class="lbl" x="270" y="172" text-anchor="middle">EL BURRO</text>
-      </g>
-      <g>
-        <ellipse class="rip" cx="790" cy="150" rx="75" ry="35" style="animation-delay:1s"/>
-        <ellipse class="rip" cx="790" cy="150" rx="75" ry="35" style="animation-delay:3s"/>
-        <path class="wet" d="M725 150 C730 112 820 105 860 135 C880 165 845 192 790 188 C740 190 720 172 725 150Z"/>
-        <text class="lbl" x="790" y="152" text-anchor="middle">TECHO</text>
-      </g>
-      <g>
-        <ellipse class="rip" cx="400" cy="470" rx="80" ry="40" style="animation-delay:1.5s"/>
-        <ellipse class="rip" cx="400" cy="470" rx="80" ry="40" style="animation-delay:3.5s"/>
-        <path class="wet" d="M330 470 C335 428 430 420 475 452 C495 485 458 515 400 512 C350 515 325 495 330 470Z"/>
-        <text class="lbl" x="403" y="473" text-anchor="middle">LA VACA</text>
-      </g>
-
-      <!-- POT: piezas aisladas -->
-      <g class="pot">
-        <rect class="potbox" x="150" y="90" width="260" height="170" rx="12"/>
-        <rect class="potbox" x="670" y="70" width="260" height="170" rx="12"/>
-        <rect class="potbox" x="270" y="395" width="260" height="170" rx="12"/>
-        <rect class="potbox" x="520" y="262" width="150" height="140" rx="12"/>
-        <text class="stampt" x="156" y="82">RESERVA HÍDRICA PROTEGIDA</text>
-        <text class="stampt" x="676" y="62">RESERVA HÍDRICA PROTEGIDA</text>
-        <text class="stampt" x="276" y="387">RESERVA HÍDRICA PROTEGIDA</text>
-        <text class="stampt" x="523" y="254">PREDIO · BODEGAS</text>
-        <rect x="552" y="305" width="90" height="56" rx="4" fill="rgba(255,255,255,.08)" stroke="#f4f4f4" stroke-width="1"/>
-        <text class="lbl" x="597" y="338" text-anchor="middle">CORABASTOS</text>
-      </g>
-
-      <!-- Realidad: tejido vivo -->
-      <g class="real">
-        <g id="veins"></g>
-        <g id="vendors"></g>
-        <circle class="heart" cx="597" cy="334" r="26"/>
-        <circle cx="597" cy="334" r="26" fill="none" stroke="#fff" stroke-opacity=".35"/>
-        <text class="lbl" x="597" y="382" text-anchor="middle">CORABASTOS</text>
-        <text class="lbl d" x="597" y="397" text-anchor="middle">corazón de la economía popular</text>
-        <g id="trucks"></g>
-      </g>
-    </svg>
+    <iframe id="axoFrame" title="Axonometría de Kennedy" allow="fullscreen" loading="lazy"></iframe>
   </div>
 </section>
 
@@ -439,43 +386,14 @@ document.querySelectorAll('.card').forEach(function(c){
   svg.addEventListener('pointerleave',function(){box.classList.remove('focus');edges.forEach(function(e){e.p.classList.remove('hot')});top.concat(bot).forEach(function(m){m.g.classList.remove('hot')})});
 })();
 
-/* ---------- MAPA ---------- */
+/* ---------- AXO (iframe) ---------- */
 (function(){
-  var wrap=document.getElementById('mapwrap');
-  wrap.querySelectorAll('.toggle button').forEach(function(b){b.addEventListener('click',function(){
-    wrap.dataset.mode=b.dataset.m;wrap.querySelectorAll('.toggle button').forEach(function(x){x.classList.toggle('on',x===b)});
-  })});
-  var H={x:597,y:334},veins=document.getElementById('veins'),vend=document.getElementById('vendors'),tr=document.getElementById('trucks');
-  // venas: comerciantes en periferia que convergen al corazón
-  for(var i=0;i<46;i++){
-    var a=Math.random()*6.283,r=170+Math.random()*250;
-    var sx=H.x+Math.cos(a)*r*1.35,sy=H.y+Math.sin(a)*r*.85;
-    sx=Math.max(20,Math.min(980,sx));sy=Math.max(20,Math.min(580,sy));
-    var mx=(sx+H.x)/2+(Math.random()-.5)*120,my=(sy+H.y)/2+(Math.random()-.5)*120;
-    var id='v'+i,d='M'+sx.toFixed(0)+' '+sy.toFixed(0)+' Q'+mx.toFixed(0)+' '+my.toFixed(0)+' '+H.x+' '+H.y;
-    el('path',{d:d,class:'vein',id:id},veins);
-    el('circle',{cx:sx,cy:sy,r:2.4,class:'vend'},vend);
-    if(!reduce){
-      var c=el('circle',{r:2,class:'vend'},vend);
-      var m=el('animateMotion',{dur:(3+Math.random()*4)+'s',repeatCount:'indefinite',begin:(-Math.random()*5)+'s'},c);
-      el('mpath',{href:'#'+id},m);
-    }
-  }
-  // tractomulas sobre ejes
-  function trucks(pid,n,dur,rev){
-    for(var i=0;i<n;i++){
-      var g=el('g',{},tr);
-      el('rect',{x:-9,y:-3.5,width:18,height:7,rx:2,class:'truck'},g);
-      el('rect',{x:-9,y:-3.5,width:5,height:7,rx:1,fill:'#fff',opacity:.7},g);
-      if(!reduce){
-        var m=el('animateMotion',{dur:dur+'s',repeatCount:'indefinite',begin:(-i*dur/n)+'s',rotate:'auto',keyPoints:rev?'1;0':'0;1',keyTimes:'0;1',calcMode:'linear'},g);
-        el('mpath',{href:'#'+pid},m);
-      }else{g.setAttribute('transform','translate('+(150+i*120)+' 200)')}
-    }
-  }
-  trucks('rCali',7,14,false);trucks('rCali',5,16,true);
-  trucks('rC80',8,13,false);trucks('rC80',6,15,true);
-  trucks('rAm',6,16,false);
+  var box=document.getElementById('axo'),fr=document.getElementById('axoFrame'),btn=box.querySelectorAll('.toggle button');
+  function go(b){btn.forEach(function(x){x.classList.toggle('on',x===b)});fr.src=b.dataset.src}
+  btn.forEach(function(b){b.addEventListener('click',function(){go(b)})});
+  var done=false;function once(){if(!done){done=true;go(btn[0])}}
+  new IntersectionObserver(function(es){if(es[0].isIntersecting)once()},{rootMargin:"400px"}).observe(box);
+  setTimeout(once,2500);
 })();
 
 /* ---------- Pregunta: agua ---------- */
