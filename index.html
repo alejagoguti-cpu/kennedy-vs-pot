@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kennedy versus POT</title>
+<meta name="description" content="Cómo el Decreto 555 de 2021 intenta ordenar Kennedy y por qué Corabastos no cabe en un predio movible.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0f11; --bg2:#151518; --ink:#f2f2f2; --dim:#9a9aa3; --line:rgba(255,255,255,.12);
+  --c1:#f4f4f4; --c2:#f0cf8a; --c3:#ef9a72; --c4:#e0638a; --c5:#c93a5a; --c6:#8f1d22;
+  --mono:'IBM Plex Mono',ui-monospace,monospace; --sans:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--c4);color:#000}
+
+/* progress + nav */
+#bar{position:fixed;top:0;left:0;height:2px;width:0;z-index:100;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3),var(--c4),var(--c6))}
+nav{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:14px}
+nav a{width:9px;height:9px;border-radius:50%;border:1px solid var(--dim);display:block;position:relative;transition:.4s}
+nav a.on{background:var(--c3);border-color:var(--c3);box-shadow:0 0 12px var(--c3);transform:scale(1.4)}
+nav a span{position:absolute;right:20px;top:-5px;font:500 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;opacity:0;transform:translateX(8px);transition:.3s;color:var(--ink);pointer-events:none}
+nav a:hover span{opacity:1;transform:none}
+@media(max-width:700px){nav{display:none}}
+
+section{position:relative;padding:14vh 6vw;max-width:1280px;margin:0 auto}
+.tag{font:500 11px var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--c3);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.tag::before{content:"";width:0;height:1px;background:var(--c3);transition:width 1s .2s}
+.in .tag::before,.tag.in::before{width:48px}
+h2{font-weight:900;font-size:clamp(2rem,5vw,4.2rem);line-height:1.02;letter-spacing:-.03em;margin-bottom:34px;max-width:15em}
+p.lead{font-size:clamp(1.05rem,1.5vw,1.3rem);max-width:46em;color:#d6d6da}
+p.lead b,p.lead strong{font-weight:600;color:var(--ink)}
+.mono{font-family:var(--mono)}
+.art{font:500 .78em var(--mono);color:var(--c2);background:rgba(240,207,138,.09);border:1px solid rgba(240,207,138,.25);padding:1px 7px;border-radius:99px;white-space:nowrap}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);filter:blur(6px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1),filter 1s}
+.rv.in{opacity:1;transform:none;filter:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}.d5{transition-delay:.6s}
+
+/* hero */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:10vh;max-width:none;overflow:hidden}
+#hero canvas{position:absolute;inset:0;width:100%;height:100%}
+#hero .wrap{position:relative;z-index:2;max-width:1280px;width:100%;margin:0 auto;pointer-events:none}
+#hero h1{font-weight:900;font-size:clamp(3rem,11.5vw,10.5rem);line-height:.88;letter-spacing:-.05em}
+#hero h1 .ln{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
+#hero h1 .ln>span{display:block;transform:translateY(110%);animation:up 1.3s cubic-bezier(.2,.8,.2,1) forwards}
+#hero h1 .ln:nth-child(2)>span{animation-delay:.18s}
+#hero h1 .ln:nth-child(3)>span{animation-delay:.36s}
+#hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--c1),var(--c2) 30%,var(--c4) 65%,var(--c6));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:shift 8s linear infinite alternate}
+@keyframes up{to{transform:none}}
+@keyframes shift{to{background-position:100% 0}}
+#hero .sub{margin-top:32px;font:400 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);opacity:0;animation:fade 1.2s 1.1s forwards}
+#hero .sub b{color:var(--c3);font-weight:500}
+@keyframes fade{to{opacity:1}}
+.scrollcue{position:absolute;right:6vw;bottom:10vh;z-index:3;font:500 10px var(--mono);letter-spacing:.2em;writing-mode:vertical-rl;color:var(--dim);display:flex;align-items:center;gap:12px}
+.scrollcue i{width:1px;height:60px;background:linear-gradient(var(--c3),transparent);animation:drip 2s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* promesa */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:56px}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:14px;padding:28px;position:relative;overflow:hidden;transition:transform .5s,border-color .5s}
+.card::after{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(239,154,114,.16),transparent 55%);opacity:0;transition:opacity .4s}
+.card:hover{transform:translateY(-6px);border-color:rgba(239,154,114,.5)}
+.card:hover::after{opacity:1}
+.card h3{font-weight:600;font-size:1.25rem;margin:14px 0 8px;letter-spacing:-.01em}
+.card p{font-size:.95rem;color:var(--dim)}
+.card .n{font:500 11px var(--mono);letter-spacing:.14em;color:var(--c3)}
+.ring{display:flex;align-items:center;gap:40px;margin-top:60px;flex-wrap:wrap}
+.ring svg{width:190px;height:190px;flex:none}
+.ring circle.bg{fill:none;stroke:rgba(255,255,255,.08);stroke-width:5}
+.ring circle.fg{fill:none;stroke:url(#gr);stroke-width:5;stroke-linecap:round;stroke-dasharray:540;stroke-dashoffset:540;transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 2.4s cubic-bezier(.3,.7,.2,1)}
+.ring.in circle.fg{stroke-dashoffset:0}
+.ring .num{font:900 3.4rem var(--sans);letter-spacing:-.05em;fill:var(--ink)}
+.ring .unit{font:500 10px var(--mono);letter-spacing:.2em;fill:var(--dim)}
+.upl{display:flex;flex-wrap:wrap;gap:8px;max-width:520px}
+.upl i{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.03);opacity:0;transform:scale(.4);transition:.5s}
+.ring.in .upl i{opacity:1;transform:none;background:rgba(239,154,114,.1);border-color:rgba(239,154,114,.4)}
+
+/* diagrama paisaje */
+.diagram{margin-top:50px;position:relative}
+.diagram svg{width:100%;height:auto;display:block;overflow:visible}
+.edge{fill:none;stroke-width:1.6;stroke-linecap:round;opacity:.85;transition:opacity .35s,stroke-width .35s}
+.edge.dash{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 2.6s cubic-bezier(.35,.6,.2,1) var(--dl,0s),opacity .35s,stroke-width .35s}
+.diagram.in .edge.dash{stroke-dashoffset:0}
+.diagram.focus .edge{opacity:.07}
+.diagram.focus .edge.hot{opacity:1;stroke-width:3}
+.node{cursor:pointer}
+.node rect{fill:#18181c;stroke-width:1.3;transition:.3s}
+.node text{font:500 11px var(--mono);fill:var(--ink);letter-spacing:.04em;pointer-events:none}
+.node text.s{font-size:9px;fill:var(--dim)}
+.node:hover rect,.node.hot rect{fill:#26262c}
+.diagram.focus .node{opacity:.25;transition:.3s}
+.diagram.focus .node.hot{opacity:1}
+.pdot{opacity:.95}
+.readout{margin-top:26px;min-height:110px;border-left:2px solid var(--c3);padding:6px 0 6px 22px;transition:border-color .4s;max-width:52em}
+.readout h4{font:600 1.1rem var(--sans);margin-bottom:6px}
+.readout p{font-size:.95rem;color:var(--dim)}
+.hint{font:400 11px var(--mono);letter-spacing:.1em;color:var(--dim);margin-top:14px}
+
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:5vw;margin-top:40px}
+@media(max-width:860px){.split{grid-template-columns:1fr}}
+.stat{font:900 clamp(3rem,7vw,6rem);letter-spacing:-.05em;line-height:1;background:linear-gradient(90deg,var(--c2),var(--c5));-webkit-background-clip:text;background-clip:text;color:transparent}
+.statl{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:8px}
+.stats{display:flex;gap:44px;flex-wrap:wrap;margin-top:50px}
+
+/* mapa */
+#mapwrap{margin-top:40px;position:relative;border:1px solid var(--line);border-radius:18px;background:radial-gradient(900px 500px at 55% 55%,#1b1b20,#101012);overflow:hidden}
+#mapwrap svg{width:100%;height:auto;display:block}
+.toggle{position:absolute;top:18px;left:18px;z-index:5;display:flex;border:1px solid var(--line);border-radius:99px;background:rgba(10,10,12,.8);backdrop-filter:blur(8px);overflow:hidden}
+.toggle button{background:none;border:0;color:var(--dim);font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;cursor:pointer;transition:.4s}
+.toggle button.on{background:var(--c3);color:#120a06}
+.lbl{font:500 11px var(--mono);fill:var(--ink);letter-spacing:.08em}
+.lbl.d{fill:var(--dim);font-size:9.5px}
+.road{fill:none;stroke:#3a3a42;stroke-width:12;stroke-linecap:round}
+.roadc{fill:none;stroke:#6a6a74;stroke-width:1;stroke-dasharray:6 8;animation:march 1.2s linear infinite}
+@keyframes march{to{stroke-dashoffset:-14}}
+.wet{fill:rgba(88,180,200,.14);stroke:#58b4c8;stroke-width:1.3}
+.rip{fill:none;stroke:#58b4c8;stroke-width:1;opacity:0;transform-box:fill-box;transform-origin:center;animation:rip 4s ease-out infinite}
+@keyframes rip{0%{transform:scale(.7);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+.heart{fill:var(--c5);filter:drop-shadow(0 0 14px var(--c5));transform-box:fill-box;transform-origin:center;animation:beat 1.6s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.1)}}
+.vein{fill:none;stroke:var(--c4);stroke-width:1;opacity:.5}
+.truck{fill:var(--c2)}
+.vend{fill:var(--c3)}
+.real{transition:opacity 1s}
+.pot{transition:opacity 1s}
+#mapwrap[data-mode="pot"] .real{opacity:0}
+#mapwrap[data-mode="real"] .pot{opacity:0}
+.potbox{fill:none;stroke:var(--c1);stroke-width:1;stroke-dasharray:4 6;opacity:.6}
+.stampt{font:500 10px var(--mono);fill:var(--c1);letter-spacing:.1em}
+.caption{padding:14px 22px;font:400 11px var(--mono);letter-spacing:.08em;color:var(--dim);border-top:1px solid var(--line)}
+
+/* pregunta */
+#origen{min-height:100vh;display:flex;flex-direction:column;justify-content:center;max-width:none;overflow:hidden;text-align:center;align-items:center}
+#origen canvas{position:absolute;inset:0;width:100%;height:100%}
+#origen .in-c{position:relative;z-index:2;max-width:1000px}
+#origen p.pre{font-size:clamp(1rem,1.6vw,1.3rem);color:var(--dim);max-width:40em;margin:0 auto 36px}
+#origen h2{max-width:none;margin:0 auto 40px;font-size:clamp(2rem,5.2vw,4.6rem)}
+#origen h2 .w{display:inline-block;opacity:0;transform:translateY(30px);filter:blur(8px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+#origen.in h2 .w{opacity:1;transform:none;filter:none}
+.cta{display:inline-flex;align-items:center;gap:12px;font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;border:1px solid var(--c3);border-radius:99px;padding:15px 30px;position:relative;overflow:hidden;transition:.4s}
+.cta:hover{background:var(--c3);color:#120a06;box-shadow:0 0 40px rgba(239,154,114,.4)}
+.cta i{font-style:normal;transition:transform .4s}
+.cta:hover i{transform:translateX(6px)}
+footer{padding:40px 6vw;border-top:1px solid var(--line);font:400 11px var(--mono);letter-spacing:.1em;color:var(--dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none;filter:none}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav id="nav">
+  <a href="#hero"><span>Inicio</span></a>
+  <a href="#promesa"><span>La promesa</span></a>
+  <a href="#entiende"><span>Lo que el POT entiende</span></a>
+  <a href="#falla"><span>La falla de fondo</span></a>
+  <a href="#origen"><span>La pregunta</span></a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="heroCv"></canvas>
+  <div class="wrap">
+    <h1>
+      <span class="ln"><span>Kennedy</span></span>
+      <span class="ln"><span><em>versus</em></span></span>
+      <span class="ln"><span>POT</span></span>
+    </h1>
+    <p class="sub">Decreto 555 de 2021 · <b>Corabastos</b> · Humedales El Burro, Techo y La Vaca</p>
+  </div>
+  <div class="scrollcue"><i></i>DESLIZA</div>
+</section>
+
+<!-- PROMESA -->
+<section id="promesa">
+  <div class="tag rv">01 · El marco</div>
+  <h2 class="rv d1">La promesa de los quince minutos</h2>
+  <p class="lead rv d2">Para empezar, analizamos cómo el Plan de Ordenamiento Territorial (<b>Decreto 555 de 2021</b>) intenta organizar a Kennedy. El POT propone ordenar la localidad bajo la promesa de la <b>proximidad y los quince minutos</b>, subdividiéndola en Unidades de Planeamiento Local <span class="art">arts. 9 y 10</span> y planteando Actuaciones Estratégicas como el <b>Eje Tintal</b>, <b>Porvenir</b> y <b>Chucua La Vaca</b> <span class="art">art. 81</span>.</p>
+
+  <div class="ring" id="ring">
+    <svg viewBox="0 0 200 200">
+      <defs><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f4f4"/><stop offset=".4" stop-color="#f0cf8a"/><stop offset=".75" stop-color="#e0638a"/><stop offset="1" stop-color="#8f1d22"/></linearGradient></defs>
+      <circle class="bg" cx="100" cy="100" r="86"/>
+      <circle class="fg" cx="100" cy="100" r="86"/>
+      <text class="num" x="100" y="108" text-anchor="middle" id="ringNum">0</text>
+      <text class="unit" x="100" y="130" text-anchor="middle">MINUTOS</text>
+    </svg>
+    <div>
+      <div class="statl" style="margin-bottom:14px">Kennedy dividida en piezas de planeamiento (UPL)</div>
+      <div class="upl" id="upl"></div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="card rv"><div class="n">ARTS. 9 · 10</div><h3>Unidades de Planeamiento Local</h3><p>La localidad se subdivide en piezas donde cada vecino debería resolver lo cotidiano a distancia caminable.</p></div>
+    <div class="card rv d1"><div class="n">ART. 81</div><h3>Actuaciones Estratégicas</h3><p>Eje Tintal, Porvenir y Chucua La Vaca: tres apuestas de transformación sobre el borde occidental.</p></div>
+    <div class="card rv d2"><div class="n">PROXIMIDAD</div><h3>La ciudad de cercanías</h3><p>Trabajo, cuidado, abastecimiento y espacio público a un trayecto corto. Una promesa limpia sobre el papel.</p></div>
+  </div>
+</section>
+
+<!-- ENTIENDE -->
+<section id="entiende">
+  <div class="tag rv">02 · Lo que el POT sí entiende</div>
+  <h2 class="rv d1">Descentralizar a Corabastos</h2>
+  <p class="lead rv d2">A través del artículo 570 sobre el <b>Sistema de Abastecimiento</b>, la norma reconoce que concentrar la venta mayorista de alimentos en un solo punto genera <b>fragilidad en la seguridad alimentaria</b>, colapsa la red vial con el tráfico pesado <span class="art">arts. 152 y 308</span> y degrada los humedales El Burro, Techo y La Vaca <span class="art">arts. 47 y 55</span>.</p>
+
+  <div class="diagram rv" id="diagram">
+    <svg viewBox="0 0 1100 560" id="dsvg" aria-label="Diagrama de artículos del POT conectados con realidades de Kennedy"></svg>
+    <div class="readout" id="readout"><h4>Pasa el cursor o toca un nodo</h4><p>Cada línea une un artículo del POT (arriba) con la realidad de Kennedy sobre la que actúa (abajo).</p></div>
+    <div class="hint">▲ ARTÍCULOS DEL DECRETO 555 &nbsp;·&nbsp; ▼ REALIDADES DE KENNEDY</div>
+  </div>
+
+  <p class="lead rv" style="margin-top:80px">Por eso, el plan busca pasar de un <b>gran nodo mayorista a una red regional equilibrada</b>, combinando esta estrategia con <b>Manzanas del Cuidado</b> <span class="art">arts. 94 y 169</span> para responder a las deudas sociales en sectores como <b>Patio Bonito</b> y <b>Tintal</b>.</p>
+
+  <div class="stats">
+    <div class="rv"><div class="stat" data-n="1">0</div><div class="statl">nodo mayorista hoy</div></div>
+    <div class="rv d1"><div class="stat" data-n="3">0</div><div class="statl">humedales presionados</div></div>
+    <div class="rv d2"><div class="stat" data-n="2">0</div><div class="statl">ejes viales de tractomulas</div></div>
+    <div class="rv d3"><div class="stat" data-n="1">0</div><div class="statl">red regional prometida</div></div>
+  </div>
+</section>
+
+<!-- FALLA -->
+<section id="falla">
+  <div class="tag rv">03 · La falla de fondo</div>
+  <h2 class="rv d1">Un corazón no se mueve en el mapa</h2>
+  <div class="split">
+    <p class="lead rv">Sin embargo, la falla de fondo del POT es asumir que Corabastos es <b>solo un predio de bodegas que se puede mover en el mapa</b>, ignorando que funciona como el <b>corazón de un tejido vivo de economía popular</b> que sostiene a Kennedy y a la ciudad.</p>
+    <p class="lead rv d1">Además, la norma <b>fragmenta la localidad en piezas aisladas</b>: dibuja reservas hídricas protegidas, pero al mismo tiempo consolida el tráfico de tractomulas por la <b>Avenida Ciudad de Cali</b> y la <b>Carrera 80</b>, bordeando los mismos ecosistemas que promete cuidar.</p>
+  </div>
+
+  <div id="mapwrap" class="rv" data-mode="real">
+    <div class="toggle">
+      <button data-m="pot">Lo que dibuja el POT</button>
+      <button data-m="real" class="on">Lo que ocurre</button>
+    </div>
+    <svg viewBox="0 0 1000 600" id="msvg" aria-label="Esquema de Kennedy: Corabastos, humedales y ejes viales">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,.035)"/></pattern>
+      </defs>
+      <rect width="1000" height="600" fill="url(#grid)"/>
+
+      <!-- vías -->
+      <path id="rCali" class="road" d="M170 -10 C190 150 140 300 200 420 S260 560 250 620"/>
+      <path class="roadc" d="M170 -10 C190 150 140 300 200 420 S260 560 250 620"/>
+      <path id="rC80" class="road" d="M560 -10 C540 120 600 240 590 330 S540 500 580 620"/>
+      <path class="roadc" d="M560 -10 C540 120 600 240 590 330 S540 500 580 620"/>
+      <path id="rAm" class="road" d="M-10 300 C200 330 400 270 590 330 S850 380 1010 340" style="stroke-width:9"/>
+      <text class="lbl d" x="188" y="560" transform="rotate(-88 188 560)">AV. CIUDAD DE CALI</text>
+      <text class="lbl d" x="615" y="120" transform="rotate(88 615 120)">CARRERA 80</text>
+      <text class="lbl d" x="40" y="285">AV. DE LAS AMÉRICAS</text>
+
+      <!-- humedales -->
+      <g>
+        <ellipse class="rip" cx="270" cy="170" rx="70" ry="38"/>
+        <ellipse class="rip" cx="270" cy="170" rx="70" ry="38" style="animation-delay:2s"/>
+        <path class="wet" d="M205 170 C210 130 290 118 335 150 C355 180 320 212 270 208 C225 210 200 195 205 170Z"/>
+        <text class="lbl" x="270" y="172" text-anchor="middle">EL BURRO</text>
+      </g>
+      <g>
+        <ellipse class="rip" cx="790" cy="150" rx="75" ry="35" style="animation-delay:1s"/>
+        <ellipse class="rip" cx="790" cy="150" rx="75" ry="35" style="animation-delay:3s"/>
+        <path class="wet" d="M725 150 C730 112 820 105 860 135 C880 165 845 192 790 188 C740 190 720 172 725 150Z"/>
+        <text class="lbl" x="790" y="152" text-anchor="middle">TECHO</text>
+      </g>
+      <g>
+        <ellipse class="rip" cx="400" cy="470" rx="80" ry="40" style="animation-delay:1.5s"/>
+        <ellipse class="rip" cx="400" cy="470" rx="80" ry="40" style="animation-delay:3.5s"/>
+        <path class="wet" d="M330 470 C335 428 430 420 475 452 C495 485 458 515 400 512 C350 515 325 495 330 470Z"/>
+        <text class="lbl" x="403" y="473" text-anchor="middle">LA VACA</text>
+      </g>
+
+      <!-- POT: piezas aisladas -->
+      <g class="pot">
+        <rect class="potbox" x="150" y="90" width="260" height="170" rx="12"/>
+        <rect class="potbox" x="670" y="70" width="260" height="170" rx="12"/>
+        <rect class="potbox" x="270" y="395" width="260" height="170" rx="12"/>
+        <rect class="potbox" x="520" y="262" width="150" height="140" rx="12"/>
+        <text class="stampt" x="156" y="82">RESERVA HÍDRICA PROTEGIDA</text>
+        <text class="stampt" x="676" y="62">RESERVA HÍDRICA PROTEGIDA</text>
+        <text class="stampt" x="276" y="387">RESERVA HÍDRICA PROTEGIDA</text>
+        <text class="stampt" x="523" y="254">PREDIO · BODEGAS</text>
+        <rect x="552" y="305" width="90" height="56" rx="4" fill="rgba(255,255,255,.08)" stroke="#f4f4f4" stroke-width="1"/>
+        <text class="lbl" x="597" y="338" text-anchor="middle">CORABASTOS</text>
+      </g>
+
+      <!-- Realidad: tejido vivo -->
+      <g class="real">
+        <g id="veins"></g>
+        <g id="vendors"></g>
+        <circle class="heart" cx="597" cy="334" r="26"/>
+        <circle cx="597" cy="334" r="26" fill="none" stroke="#fff" stroke-opacity=".35"/>
+        <text class="lbl" x="597" y="382" text-anchor="middle">CORABASTOS</text>
+        <text class="lbl d" x="597" y="397" text-anchor="middle">corazón de la economía popular</text>
+        <g id="trucks"></g>
+      </g>
+    </svg>
+    <div class="caption" id="cap">ESQUEMA CONCEPTUAL, NO A ESCALA · tractomulas (amarillo) y comerciantes (naranja) convergen sobre Corabastos mientras bordean los humedales.</div>
+  </div>
+</section>
+
+<!-- ORIGEN -->
+<section id="origen">
+  <canvas id="waterCv"></canvas>
+  <div class="in-c">
+    <div class="tag rv" style="justify-content:center">04 · La pregunta de origen</div>
+    <p class="pre rv d1">Pretender resolver una sobrecarga de escala regional mediante intervenciones físicas locales y desarticuladas es la razón por la que la planificación choca con la realidad del territorio. Para entender por qué se acumuló esta sobrecarga en la zona, debemos hacernos la pregunta de origen:</p>
+    <h2 id="q">¿por qué se decidió construir la gran central mayorista de la ciudad justamente sobre la antigua cuenca hídrica del Tintal?</h2>
+    <a class="cta rv d3" href="https://alejagoguti-cpu.github.io/humedalburro-secuencia/">Seguir la secuencia del humedal <i>→</i></a>
+  </div>
+</section>
+
+<footer><span>KENNEDY VERSUS POT · DECRETO 555 DE 2021</span><span>Bogotá, localidad de Kennedy</span></footer>
+
+<script>
+(function(){
+'use strict';
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var COL=['#f4f4f4','#f0cf8a','#ef9a72','#e0638a','#c93a5a','#8f1d22'];
+var NS='http://www.w3.org/2000/svg';
+function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+
+/* ---------- progress + nav ---------- */
+var bar=document.getElementById('bar');
+var navA=[].slice.call(document.querySelectorAll('#nav a'));
+var secs=navA.map(function(a){return document.querySelector(a.getAttribute('href'))});
+function onScroll(){
+  var h=document.documentElement;
+  bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  var y=h.scrollTop+innerHeight*.5,cur=0;
+  secs.forEach(function(s,i){if(s.offsetTop<=y)cur=i});
+  navA.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* ---------- reveal ---------- */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);if(e.target.id==='ring')runRing();if(e.target.querySelector&&e.target.querySelector('.stat'))runStats(e.target)}
+})},{threshold:.18});
+document.querySelectorAll('.rv,.ring,#origen,.tag').forEach(function(n){io.observe(n)});
+
+/* ---------- counters ---------- */
+function count(node,to,dur){
+  if(reduce){node.textContent=to;return}
+  var t0=performance.now();
+  (function f(t){var p=Math.min(1,(t-t0)/dur);node.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0);
+}
+function runStats(root){var s=root.querySelector('.stat');if(s&&!s.dataset.done){s.dataset.done=1;count(s,+s.dataset.n,1600)}}
+function runRing(){count(document.getElementById('ringNum'),15,2400)}
+
+/* UPL tiles */
+var upl=document.getElementById('upl');
+for(var i=0;i<12;i++){var t=document.createElement('i');t.style.transitionDelay=(i*.09+.3)+'s';upl.appendChild(t)}
+
+/* card spotlight */
+document.querySelectorAll('.card').forEach(function(c){
+  c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')});
+});
+
+/* ---------- HERO canvas: curvas luminosas con partículas ---------- */
+(function(){
+  var cv=document.getElementById('heroCv'),cx=cv.getContext('2d'),W,H,DPR=Math.min(2,devicePixelRatio||1),curves=[],mouse={x:.5,y:.5};
+  function size(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0);build()}
+  function build(){
+    curves=[];var n=Math.round(Math.max(14,Math.min(34,W/42)));
+    for(var i=0;i<n;i++){
+      var c=COL[i%COL.length];
+      var sx=W*(.05+Math.random()*.9),ex=W*(.04+((i+Math.random()*.6)/n)*.92);
+      curves.push({c:c,sx:sx,sy:-20,ex:ex,ey:H*.78,k1:(Math.random()-.5)*W*.7,k2:(Math.random()-.5)*W*.7,
+        ph:Math.random()*6.28,sp:.00025+Math.random()*.0004,dots:[Math.random(),Math.random()+1],ds:.0001+Math.random()*.00018});
+    }
+  }
+  function pt(c,t,mx){
+    var x1=c.sx+c.k1*.3,y1=H*.3,x2=c.ex+c.k2*.3,y2=H*.55,mt=1-t;
+    var sh=Math.sin(c.ph+t*3)*10+(mx-.5)*30*(1-t);
+    return [mt*mt*mt*c.sx+3*mt*mt*t*x1+3*mt*t*t*x2+t*t*t*c.ex+sh,
+            mt*mt*mt*c.sy+3*mt*mt*t*y1+3*mt*t*t*y2+t*t*t*c.ey];
+  }
+  function frame(now){
+    cx.clearRect(0,0,W,H);
+    cx.globalCompositeOperation='lighter';
+    curves.forEach(function(c){
+      c.ph+=c.sp*16;
+      cx.beginPath();
+      for(var s=0;s<=60;s++){var p=pt(c,s/60,mouse.x);s?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1])}
+      cx.strokeStyle=c.c;cx.globalAlpha=.28;cx.lineWidth=1.4;cx.stroke();
+      c.dots.forEach(function(d,i){
+        c.dots[i]=(d+c.ds*16)%1.6;var t=c.dots[i];if(t>1)return;
+        var p=pt(c,t,mouse.x);var g=cx.createRadialGradient(p[0],p[1],0,p[0],p[1],14);
+        g.addColorStop(0,c.c);g.addColorStop(1,'transparent');cx.globalAlpha=.9;cx.fillStyle=g;cx.fillRect(p[0]-14,p[1]-14,28,28);
+      });
+      var e=pt(c,1,mouse.x);cx.globalAlpha=.9;cx.fillStyle=c.c;cx.fillRect(e[0]-14,e[1]+2,28,2);
+    });
+    cx.globalAlpha=1;cx.globalCompositeOperation='source-over';
+    if(!reduce)requestAnimationFrame(frame);
+  }
+  addEventListener('resize',size);
+  cv.parentNode.addEventListener('pointermove',function(e){mouse.x=e.clientX/innerWidth});
+  size();requestAnimationFrame(frame);
+})();
+
+/* ---------- DIAGRAMA paisaje de artículos ---------- */
+(function(){
+  var svg=document.getElementById('dsvg'),box=document.getElementById('diagram'),ro=document.getElementById('readout');
+  var top=[
+    {id:'a9',t:'ARTS. 9 · 10',s:'UPL',to:['b1'],d:'Unidades de Planeamiento Local: subdividen Kennedy en piezas para la proximidad.'},
+    {id:'a81',t:'ART. 81',s:'ACTUACIONES',to:['b1','b3'],d:'Actuaciones Estratégicas: Eje Tintal, Porvenir y Chucua La Vaca.'},
+    {id:'a570',t:'ART. 570',s:'ABASTECIMIENTO',to:['b2','b3','b4'],d:'Sistema de Abastecimiento: reconoce que un solo nodo mayorista es una fragilidad y propone una red regional.'},
+    {id:'a152',t:'ARTS. 152 · 308',s:'MOVILIDAD',to:['b4'],d:'Red vial y movilidad de carga: el tráfico pesado colapsa la malla que rodea a Corabastos.'},
+    {id:'a47',t:'ARTS. 47 · 55',s:'HUMEDALES',to:['b3'],d:'Estructura ecológica principal: protege El Burro, Techo y La Vaca.'},
+    {id:'a94',t:'ARTS. 94 · 169',s:'CUIDADO',to:['b5','b1'],d:'Manzanas del Cuidado: responden a las deudas sociales de Patio Bonito y Tintal.'}
+  ];
+  var bot=[
+    {id:'b1',t:'PROXIMIDAD',s:'15 MIN',d:'La promesa de la ciudad de cercanías, ordenada por UPL y Actuaciones Estratégicas.'},
+    {id:'b2',t:'SEGURIDAD ALIMENTARIA',s:'FRAGILIDAD',d:'Concentrar la venta mayorista en un punto único deja a la ciudad expuesta si ese punto falla.'},
+    {id:'b3',t:'HUMEDALES',s:'BURRO · TECHO · VACA',d:'Ecosistemas presionados por el entorno logístico de la central.'},
+    {id:'b4',t:'TRÁFICO PESADO',s:'AV. CALI · CRA 80',d:'Tractomulas sobre los mismos ejes que bordean los ecosistemas protegidos.'},
+    {id:'b5',t:'DEUDA SOCIAL',s:'PATIO BONITO · TINTAL',d:'Sectores con déficit de equipamientos de cuidado.'}
+  ];
+  var W=1100,TY=40,BY=470,NW=170,NH=46;
+  function xs(n){var g=(W-n*NW)/(n+1);return Array.apply(null,Array(n)).map(function(_,i){return g+i*(NW+g)+NW/2})}
+  var tx=xs(top.length),bx=xs(bot.length),map={};
+  top.forEach(function(n,i){n.x=tx[i];n.y=TY;n.col=COL[i];map[n.id]=n});
+  bot.forEach(function(n,i){n.x=bx[i];n.y=BY;n.col=COL[i+1>5?5:i+1];map[n.id]=n});
+  var gE=el('g',{},svg),gN=el('g',{},svg),edges=[],k=0;
+  top.forEach(function(a){a.to.forEach(function(bid){
+    var b=map[bid],y1=a.y+NH,y2=b.y;
+    var d='M'+a.x+' '+y1+' C'+a.x+' '+(y1+200)+' '+b.x+' '+(y2-200)+' '+b.x+' '+y2;
+    var p=el('path',{d:d,class:'edge dash',stroke:a.col},gE);
+    edges.push({p:p,a:a.id,b:bid,col:a.col});
+  })});
+  setTimeout(function(){edges.forEach(function(e,i){var L=e.p.getTotalLength();e.p.style.setProperty('--len',L);e.p.style.setProperty('--dl',(i*.12)+'s');
+    // partículas
+    if(!reduce){var c=el('circle',{r:3,fill:e.col,class:'pdot'},gE);
+      var m=el('animateMotion',{dur:(4+Math.random()*3)+'s',repeatCount:'indefinite',begin:(2.8+Math.random()*2)+'s'},c);
+      var mp=el('mpath',{},m);mp.setAttributeNS('http://www.w3.org/1999/xlink','href','#ep'+edges.indexOf(e));e.p.id='ep'+edges.indexOf(e)}
+  })},50);
+  function mk(n,top){
+    var g=el('g',{class:'node',transform:'translate('+(n.x-NW/2)+' '+n.y+')','data-id':n.id},gN);
+    el('rect',{width:NW,height:NH,rx:8,stroke:n.col},g);
+    var t=el('text',{x:NW/2,y:20,'text-anchor':'middle'},g);t.textContent=n.t;
+    var s=el('text',{x:NW/2,y:35,'text-anchor':'middle',class:'s'},g);s.textContent=n.s;
+    n.g=g;
+    g.addEventListener('pointerenter',function(){focus(n)});
+    g.addEventListener('click',function(){focus(n)});
+  }
+  top.forEach(function(n){mk(n)});bot.forEach(function(n){mk(n)});
+  function focus(n){
+    var rel={};rel[n.id]=1;
+    box.classList.add('focus');
+    edges.forEach(function(e){var hot=e.a===n.id||e.b===n.id;e.p.classList.toggle('hot',hot);if(hot){rel[e.a]=1;rel[e.b]=1}});
+    top.concat(bot).forEach(function(m){m.g.classList.toggle('hot',!!rel[m.id])});
+    ro.style.borderColor=n.col;ro.innerHTML='<h4>'+n.t+' · '+n.s+'</h4><p>'+n.d+'</p>';
+  }
+  svg.addEventListener('pointerleave',function(){box.classList.remove('focus');edges.forEach(function(e){e.p.classList.remove('hot')});top.concat(bot).forEach(function(m){m.g.classList.remove('hot')})});
+})();
+
+/* ---------- MAPA ---------- */
+(function(){
+  var wrap=document.getElementById('mapwrap');
+  wrap.querySelectorAll('.toggle button').forEach(function(b){b.addEventListener('click',function(){
+    wrap.dataset.mode=b.dataset.m;wrap.querySelectorAll('.toggle button').forEach(function(x){x.classList.toggle('on',x===b)});
+    document.getElementById('cap').textContent=b.dataset.m==='pot'
+      ?'LO QUE DIBUJA EL POT · reservas hídricas y un predio de bodegas como piezas aisladas, cada una con su norma.'
+      :'ESQUEMA CONCEPTUAL, NO A ESCALA · tractomulas (amarillo) y comerciantes (naranja) convergen sobre Corabastos mientras bordean los humedales.';
+  })});
+  var H={x:597,y:334},veins=document.getElementById('veins'),vend=document.getElementById('vendors'),tr=document.getElementById('trucks');
+  // venas: comerciantes en periferia que convergen al corazón
+  for(var i=0;i<46;i++){
+    var a=Math.random()*6.283,r=170+Math.random()*250;
+    var sx=H.x+Math.cos(a)*r*1.35,sy=H.y+Math.sin(a)*r*.85;
+    sx=Math.max(20,Math.min(980,sx));sy=Math.max(20,Math.min(580,sy));
+    var mx=(sx+H.x)/2+(Math.random()-.5)*120,my=(sy+H.y)/2+(Math.random()-.5)*120;
+    var id='v'+i,d='M'+sx.toFixed(0)+' '+sy.toFixed(0)+' Q'+mx.toFixed(0)+' '+my.toFixed(0)+' '+H.x+' '+H.y;
+    el('path',{d:d,class:'vein',id:id},veins);
+    el('circle',{cx:sx,cy:sy,r:2.4,class:'vend'},vend);
+    if(!reduce){
+      var c=el('circle',{r:2,class:'vend'},vend);
+      var m=el('animateMotion',{dur:(3+Math.random()*4)+'s',repeatCount:'indefinite',begin:(-Math.random()*5)+'s'},c);
+      el('mpath',{href:'#'+id},m);
+    }
+  }
+  // tractomulas sobre ejes
+  function trucks(pid,n,dur,rev){
+    for(var i=0;i<n;i++){
+      var g=el('g',{},tr);
+      el('rect',{x:-9,y:-3.5,width:18,height:7,rx:2,class:'truck'},g);
+      el('rect',{x:-9,y:-3.5,width:5,height:7,rx:1,fill:'#fff',opacity:.7},g);
+      if(!reduce){
+        var m=el('animateMotion',{dur:dur+'s',repeatCount:'indefinite',begin:(-i*dur/n)+'s',rotate:'auto',keyPoints:rev?'1;0':'0;1',keyTimes:'0;1',calcMode:'linear'},g);
+        el('mpath',{href:'#'+pid},m);
+      }else{g.setAttribute('transform','translate('+(150+i*120)+' 200)')}
+    }
+  }
+  trucks('rCali',7,14,false);trucks('rCali',5,16,true);
+  trucks('rC80',8,13,false);trucks('rC80',6,15,true);
+  trucks('rAm',6,16,false);
+})();
+
+/* ---------- Pregunta: agua ---------- */
+(function(){
+  var q=document.getElementById('q');
+  q.innerHTML=q.textContent.split(' ').map(function(w,i){return '<span class="w" style="transition-delay:'+(i*.06)+'s">'+w+'</span>'}).join(' ');
+  var cv=document.getElementById('waterCv'),cx=cv.getContext('2d'),W,H,DPR=Math.min(2,devicePixelRatio||1),t=0,rip=[];
+  function size(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0)}
+  size();addEventListener('resize',size);
+  cv.parentNode.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();if(Math.random()<.25)rip.push({x:e.clientX-r.left,y:e.clientY-r.top,r:0})});
+  function f(){
+    t+=.01;cx.clearRect(0,0,W,H);
+    for(var l=0;l<7;l++){
+      cx.beginPath();
+      for(var x=0;x<=W;x+=12){var y=H*(.55+l*.07)+Math.sin(x*.006+t*(1+l*.25)+l)*18+Math.sin(x*.013-t*1.4)*8;x?cx.lineTo(x,y):cx.moveTo(x,y)}
+      cx.strokeStyle=COL[l%COL.length];cx.globalAlpha=.1+l*.03;cx.lineWidth=1.2;cx.stroke();
+    }
+    rip=rip.filter(function(p){return p.r<160});
+    rip.forEach(function(p){p.r+=1.6;cx.beginPath();cx.ellipse(p.x,p.y,p.r,p.r*.4,0,0,6.283);cx.strokeStyle='#58b4c8';cx.globalAlpha=1-p.r/160;cx.stroke()});
+    cx.globalAlpha=1;
+    if(!reduce)requestAnimationFrame(f);
+  }
+  f();
+})();
+})();
+</script>
+</body>
+</html>
